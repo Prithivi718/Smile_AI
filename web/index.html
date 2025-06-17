@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JARVIS</title>
+
+    <link rel="shortcut icon" href="assests/imag/arc_reactor.jpg" type="image/jpg" />
+
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+
+    <!--Bootstrap Icons-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+    <!--Texllate-->
+    <link rel="stylesheet" href="assests/vendore/texllate/texllate/animate.css" />
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="flex-grow-1 d-flex align-items-center justify-content-center">
+            <h5 class="text-light text" id="textillateExample">
+                Hello I am Jarvis. How can I assist you today?
+            </h5>
+        </div>
+
+        <div class="col-md-12 mt-4 pt-4">
+            <div class="text-center">
+                <div id="textinput" class="d-flex">
+                    <input type="text" class="input-field" name="chatbox" id="chatbox" placeholder="Message JARVIS" />
+                    <button id="sendbtn" class="glow-on-hover" hidden>
+                        <i class="bi bi-send"></i>
+                    </button>
+                    <button id="micbtn" class="glow-on-hover">
+                        <i class="bi bi-mic"></i>
+                    </button>
+                    <button id="chatbtn" class="glow-on-hover">
+                        <i class="bi bi-chat-dots"></i>
+                    </button>
+                </div>
+                <!-- Sidebar Button -->
+                <button id="chat-sidebar-btn" class="btn btn-primary position-absolute top-0 end-0 m-3 glow-on-hover"
+                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+                    aria-controls="offcanvasScrolling"><i class="bi bi-layout-sidebar"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Panel -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Notifications</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="notifications-container">
+                <!-- Example notification items -->
+                <div class="notification-item"></div>
+            </div>
+        </div>
+    </div>
+
+    <!--Jquery  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <!--Bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <!--Texllate js-->
+    <script src="assests/vendore/texllate/texllate/jquery.fittext.js"></script>
+    <script src="assests/vendore/texllate/texllate/jquery.lettering.js"></script>
+    <script src="http://jschr.github.io/textillate/jquery.textillate.js"></script>
+
+    <!-- Include Typed.js from a CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+
+    <script src="main.js"></script>
+    <script src="controller.js"></script>
+    <script src="/eel.js"></script>
+</body>
+
+</html>
+</body>
