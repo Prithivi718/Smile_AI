@@ -2,6 +2,7 @@ from os import getenv, path
 from dotenv import load_dotenv
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+import eel
 
 # -------------------------- MODULE 1: Setup --------------------------
 from selenium import webdriver
@@ -63,7 +64,7 @@ def smart_login(chrome_driver, cookie_file= cookies_path):
 
     # If cookies file exists, try to load and check login status
     if path.exists(cookie_file):
-        print("🔍 Trying login with cookies...")
+        # print("🔍 Trying login with cookies...")
         try:
             load_cookies(chrome_driver, cookie_file)
             chrome_driver.refresh()
@@ -71,11 +72,11 @@ def smart_login(chrome_driver, cookie_file= cookies_path):
 
             # Check for successful login (example: presence of "Me" profile icon)
             if "feed" in chrome_driver.current_url:
-                print("✅ Logged in using cookies.")
+                # print("✅ Logged in using cookies.")
                 return
 
             # If still not in feed/home, cookies might be invalid
-            print("⚠️ Cookies expired or invalid, switching to manual login...")
+            # print("⚠️ Cookies expired or invalid, switching to manual login...")
 
         except WebDriverException as e:
             print("❌ Error using cookies:", e)
@@ -147,21 +148,24 @@ def scrape_with_selenium_and_bs4(chrome_driver):
             # Now apply regex to clean up everything up to and including the first colon
             message_content = re.sub(r'^["\']?[^:]*:\s*', '', full_text)
 
-        # store or print
-        print(f"{idx}. 👤 User → {user_name}")
-        print(f"   📌 Message → {message_content}\n")
-        results.append({"user": user_name, "message": message_content})
+        # # store or print
+        # print(f"{idx}. 👤 User → {user_name}")
+        # print(f"   📌 Message → {message_content}\n")
+        results.append({"username": user_name, "message": message_content})
 
     return results
 
 # -------------------------- MODULE 6: Full Flow --------------------------
-
-if __name__ == "__main__":
+@eel.expose
+def get_notifications():
+    print("✅ get_notifications() called")
     driver = get_driver()
-
-    #smart_login(driver)
     smart_login(driver)
-
-    # go_to_messages(driver)
-    scrape_with_selenium_and_bs4(driver)
+    results = scrape_with_selenium_and_bs4(driver)
     driver.quit()
+    print("✅ Scraped Results:", results)
+    if not isinstance(results, list):
+        # wrap single result into list
+        results = [results]
+    return results
+

@@ -11,9 +11,9 @@ load_dotenv()
 
 
 
-from YTube import extract_search_topic_spacy, search_youtube,detect_tone_from_keywords
-from YTube import Extract_Query, SearchYTInput, DetectTone
-from parse_llm import mood_map_llm, MoodInput
+from Chat_YTube.yt_search import extract_search_topic_spacy, search_youtube,detect_tone_from_keywords
+from Chat_YTube.yt_search import Extract_Query, SearchYTInput, DetectTone
+from Ggen_llm import mood_map_llm, MoodInput
 
 # ---------------------- LLM Handling ----------------------
 GOOGLE_API_KEY = getenv("GOOGLE_API_KEY")
@@ -29,12 +29,9 @@ tool_extract_query = StructuredTool.from_function(
 
 tool_mood_map = StructuredTool.from_function(
     func=mood_map_llm,
-    args_schema= MoodInput,
-    infer_schema= True,
     name="MoodMapper",
-    description="Given a `search_query` and a `user_tone`, map to an uplifted tone "
-                "and generate a 3–6 word YouTube search query, returning JSON "
-                "with keys detected_tone, search_query, final_query."
+    args_schema=MoodInput,  # A Pydantic model with multiple fields
+    description="Maps tone and returns uplifted YouTube search query."
 )
 
 tool_yt_search= StructuredTool.from_function(
@@ -54,7 +51,7 @@ llm_controller = ChatGoogleGenerativeAI(
 agent = initialize_agent(
     tools=[tool_extract_query, tool_mood_map],
     llm=llm_controller,
-    agent= AgentType.ZERO_SHOT_REACT_DESCRIPTION,
+    agent= AgentType.OPENAI_MULTI_FUNCTIONS,
     verbose=True
 )
 

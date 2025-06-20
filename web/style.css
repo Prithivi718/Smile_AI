@@ -19,6 +19,7 @@ body {
 #textillateExample {
     margin-top: 2rem;
     font-size: 1.5rem;
+    color: white;
 }
 
 
@@ -26,12 +27,13 @@ body {
 
 /* Input Filed Start*/
 
+
 #textinput {
     position: fixed;
-    bottom: 2rem;
+    bottom: 3rem;
     left: 50%;
     transform: translateX(-50%);
-    width: 70%;
+    width: 50%;
     max-width: calc(100% - 8rem);
     display: flex;
     align-items: center;
@@ -326,4 +328,152 @@ svg {
 /* Adjust offcanvas width */
 .offcanvas.offcanvas-end {
     width: 350px;
+}
+
+/* Notification UI boxes */
+.notif-box {
+    background: #1e1e1e;
+    border-color: #333 !important;
+}
+
+.notif-box summary {
+    list-style: none;
+    /* remove triangle bullet */
+}
+
+.notif-box[open] {
+    background: #2a2a2a;
+    /* slightly lighter when opened */
+}
+
+.notif-username {
+    color: white;
+}
+
+.notif-message {
+    color: white;
+}
+
+/* Chat Interface Styles */
+.chat-interface {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 0;
+    max-height: calc(100vh - 250px);
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.chat-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.message {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    max-width: 80%;
+    animation: messageAppear 0.3s ease-out;
+}
+
+.message.user {
+    align-self: flex-end;
+    background: rgba(0, 69, 255, 0.1);
+    border: 1px solid #0045ff;
+}
+
+.message.assistant {
+    align-self: flex-start;
+    background: rgba(0, 255, 255, 0.1);
+    border: 1px solid cyan;
+}
+
+.message-content {
+    color: white;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.message-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.message-icon.user {
+    background: #0045ff;
+}
+
+.message-icon.assistant {
+    background: cyan;
+}
+
+@keyframes messageAppear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hide welcome message when chat starts */
+.chat-started #textillateExample {
+    display: none;
+}
+
+.chat-started .chat-interface {
+    display: flex;
+}
+
+/* Scrollbar styling */
+.chat-interface::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-interface::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.chat-interface::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+.chat-interface::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+
+/*  Youtube Video Styling */
+.video-box {
+    background: #1e1e1e;
+    border-color: #333;
+    transition: background 0.2s;
+}
+
+.video-box.open {
+    background: #2a2a2a;
+}
+
+.video-title {
+    font-weight: 600;
+}
+
+.video-desc {
+    margin-top: 0.5rem;
+    padding-left: 1rem;
 }

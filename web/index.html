@@ -25,8 +25,15 @@
     <div class="container">
         <div class="flex-grow-1 d-flex align-items-center justify-content-center">
             <h5 class="text-light text" id="textillateExample">
-                Hello I am Jarvis. How can I assist you today?
+                Hello I am Smiley. How can I assist you today?
             </h5>
+        </div>
+
+        <!-- Chat Interface -->
+        <div id="chat-interface" class="chat-interface" style="display: none;">
+            <div class="chat-messages" id="chat-messages">
+                <!-- Messages will be dynamically added here -->
+            </div>
         </div>
 
         <div class="col-md-12 mt-4 pt-4">
@@ -59,9 +66,8 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <div class="notifications-container">
-                <!-- Example notification items -->
-                <div class="notification-item"></div>
+            <div id="notify-container" class="notifications-container">
+                <!-- Notifications will be dynamically inserted here -->
             </div>
         </div>
     </div>

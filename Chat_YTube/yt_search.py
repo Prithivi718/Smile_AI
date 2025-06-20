@@ -4,7 +4,8 @@ os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
 from pydantic import BaseModel
 from typing import Optional
 
-from parse_llm import tone_keywords
+from dotenv import load_dotenv
+load_dotenv()
 from googleapiclient.discovery import build
 
 # ------------------------ Intent Extractor ------------------------
@@ -34,6 +35,31 @@ def extract_search_topic_spacy(text: str) -> str:
 class DetectTone(BaseModel):
     text: str
 
+
+tone_keywords = {
+    "bored": "funny",
+    "tired": "energetic",
+    "sad": "happy",
+    "angry": "calm",
+    "happy": "happy",
+    "motivated": "motivated",
+    "comedy": "comedy",
+    "action": "motivated",
+    "dramatic": "light-hearted",
+    "fun": "fun",
+    "excited": "excited",
+    "charming": "happy",
+    "romantic": "light-hearted",
+    "thriller": "fun",
+    "educational": "inspiring",
+    "spiritual": "calm",
+    "motivational": "motivated",
+    "inspiring": "motivated",
+    "relaxed": "soothing",
+    "fear": "light-hearted"
+}
+
+
 def detect_tone_from_keywords(text: str) -> Optional[str]:
     for keyword in tone_keywords.keys():
         if keyword in text.lower():
@@ -44,7 +70,7 @@ def detect_tone_from_keywords(text: str) -> Optional[str]:
 class SearchYTInput(BaseModel):
    text: str
 
-YOUTUBE_API_KEY = os.getenv("GOOGLE_CLOUD_CONSOLE_API_KEY")
+YOUTUBE_API_KEY = os.getenv("YOUTUBE_API")
 youtube = build(
     "youtube",
     "v3",
@@ -67,9 +93,14 @@ def search_youtube(text, max_results=5):
         title = item['snippet']['title']
         description = item['snippet']['description']
         url = f"https://www.youtube.com/watch?v={video_id}"
+        embed_url = f"https://www.youtube.com/embed/{video_id}?start=0"
+
         results.append({
             "url": url,
+            "embed_url": embed_url,
             "title": title,
             "description": description,
         })
     return results
+
+#print(search_youtube("Energetic Tamil Songs"))

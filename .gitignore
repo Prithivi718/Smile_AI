@@ -1,6 +1,11 @@
 .venv
 Chat_YTube/.env
+Chat_YTube/Ggen_llm.py
+
 Notify/.env
 Notify/cookies.json
 Chat_YTube/__pycache__
 Notify/__pycache__
+web/gpt.html
+web/gpt.css
+web/smiley.js
